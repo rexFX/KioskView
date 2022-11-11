@@ -1,0 +1,1 @@
+"https://webkiosk.juit.ac.in:9443/CommonFiles/UserAction.jsp?txtInst=Institute&InstCode=JUIT&txtuType= Member+Type&UserType= S&txtCode= Enrollment+No&MemberCode= 201297&txtPin= Password/Pin&Password= 201297_Shivam!&BTNSubmit= Submit"
