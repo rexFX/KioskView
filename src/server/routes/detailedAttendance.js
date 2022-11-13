@@ -2,13 +2,10 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const cheerio = require('cheerio');
-const bodyParser = require('body-parser');
 
-const jsonParser = bodyParser.json();
-
-router.post('/detailedAttendance/', jsonParser, async (req, res) => {
+router.post('/detailedAttendance/', async (req, res) => {
   let baseUrl = `https://webkiosk.juit.ac.in:9443/StudentFiles/Academic/${req.body['link']}`;
-  axios.get(baseUrl, { headers: req.cookies })
+  axios.get(baseUrl, { headers: req.body['Cookie'] })
     .then(resp => {
       let $ = cheerio.load(resp.data);
       let detailedList = [];

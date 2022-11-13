@@ -1,12 +1,13 @@
 import { TextField, Container, Stack, Button } from "@mui/material";
 import { useState, useContext } from "react";
 import { CookieContext } from "../../context/cookie.context";
+import axios from "axios";
 
 const Signin = () => {
 	const [user, setUser] = useState("");
 	const [pass, setPass] = useState("");
 
-	const { setCookie } = useContext(CookieContext);
+	const { cookie, setCookie } = useContext(CookieContext);
 	const userHandler = (event) => {
 		setUser(event.target.value);
 	};
@@ -16,8 +17,20 @@ const Signin = () => {
 	};
 
 	const sendAuth = async () => {
-		//server will send a cookie, save it and use it to request other stuff.
-		//When cookie expires, redirect user to the login page again.
+		let config = {
+			user,
+			pass,
+		};
+		axios
+			.post(
+				"http://localhost:3000/api/v1/login",
+				{ user, pass },
+				{ headers: { "Content-Type": "application/json" } }
+			)
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((err) => console.log(err));
 	};
 
 	return (

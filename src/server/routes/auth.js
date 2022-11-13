@@ -10,9 +10,9 @@ router.post('/login', async (req, res) => {
     txtuType: "Member Type",
     UserType: "S",
     txtCode: "Enrollment No",
-    MemberCode: req.headers.user,
+    MemberCode: req.body['user'],
     txtPin: "Password/Pin",
-    Password: req.headers.pass,
+    Password: req.body['pass'],
     BTNSubmit: "Submit",
   };
 
@@ -21,7 +21,7 @@ router.post('/login', async (req, res) => {
   let response = await post(`/CommonFiles/UserAction.jsp?${myParams}`);
   let cookie = response.headers['set-cookie'][0].match(/^J[=A-Z0-9]*/)[0];
   res.cookie('Cookie', `${cookie}`);
-  res.send('cookie sent');
+  res.send(`Cookie=${cookie}`);
 });
 
 module.exports = router;
