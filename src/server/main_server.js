@@ -1,16 +1,24 @@
-const express = require('express');
-const auth = require('./components/signin/auth.js');
-const nav = require('./components/navigation/navigation.js');
-const attendance = require('./components/attendance/attendance.js');
+const express = require('express')
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const app = express();
 
-app.post('/login', async (req, res) => {
-  let cookie = await auth.AuthUser(req.user, req.pass);
-  res.send(cookie);
-});
+app.use(cookieParser());
+app.use(cors());
 
-app.get('/attendance', async (req, res) => {
-  let attendance = await attendance.attendanceReport(req.cookie); //array
-});
+//import routes
+const auth = require('./routes/auth.js');
+const nav = require('./routes/navigation.js');
+const attendanceFetch = require('./routes/attendance.js');
+const detailedAttendance = require('./routes/detailedAttendance.js');
+const marks = require('./routes/marks.js');
+
+
+//use routes
+app.use('/api/v1', auth);
+app.use('/api/v1', attendanceFetch);
+app.use('/api/v1', detailedAttendance);
+app.use('/api/v1', nav);
+app.use('/api/v1', marks);
 
 app.listen(3000);
