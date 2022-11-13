@@ -5,7 +5,7 @@ const cheerio = require('cheerio');
 
 router.post('/detailedAttendance/', async (req, res) => {
   let baseUrl = `https://webkiosk.juit.ac.in:9443/StudentFiles/Academic/${req.body['link']}`;
-  axios.get(baseUrl, { headers: req.body['Cookie'] })
+  axios.get(baseUrl, { headers: { Cookie: req.body['Cookie'] } })
     .then(resp => {
       let $ = cheerio.load(resp.data);
       let detailedList = [];

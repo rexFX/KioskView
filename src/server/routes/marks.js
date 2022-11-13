@@ -5,7 +5,7 @@ const axios = require('axios');
 
 router.post('/marks', async (req, res) => {
   let choice;
-  axios.get('https://webkiosk.juit.ac.in:9443/StudentFiles/Exam/StudentEventMarksView.jsp', { headers: req.body['Cookie'] })
+  axios.get('https://webkiosk.juit.ac.in:9443/StudentFiles/Exam/StudentEventMarksView.jsp', { headers: { Cookie: req.body['Cookie'] } })
     .then(resp => {
       let $ = cheerio.load(resp.data);
       choice = $('#exam > option:nth-child(2)').text();
