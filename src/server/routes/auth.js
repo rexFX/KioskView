@@ -18,10 +18,17 @@ router.post('/login', async (req, res) => {
 
   let myParams = formurlencoded(params);
   const post = bent('https://webkiosk.juit.ac.in:9443', 'POST', 302);
-  let response = await post(`/CommonFiles/UserAction.jsp?${myParams}`);
-  let cookie = response.headers['set-cookie'][0].match(/^J[=A-Z0-9]*/)[0];
-  res.cookie('Cookie', `${cookie}`);
-  res.send(`Cookie=${cookie}`);
+  try {
+    let response = await post(`/CommonFiles/UserAction.jsp?${myParams}`);
+    let cookie = response.headers['set-cookie'][0].match(/^J[=A-Z0-9]*/)[0];
+    res.cookie('Cookie', `${cookie}`);
+    res.status(200);
+    res.send(`${cookie}`);
+  }
+  catch (err) {
+    res.status(401);
+    res.send("error: wrong credentials");
+  };
 });
 
 module.exports = router;

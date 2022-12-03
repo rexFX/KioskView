@@ -9,6 +9,7 @@ router.post('/attendance', async (req, res) => {
     .then(resp => {
       let $ = cheerio.load(resp.data);
       $('#table-1 > tbody').children().each((i, el) => {
+        let key = i;
         let name = $('td:nth-child(2)', el).text().trim();
         let totalAttendance, detailedAttendance;
         if (name.includes('LAB')) {
@@ -19,7 +20,7 @@ router.post('/attendance', async (req, res) => {
           totalAttendance = $('td:nth-child(3) > a', el).text().trim();
           detailedAttendance = $('td:nth-child(3) > a', el).attr('href');
         }
-        myList.push({ name, totalAttendance, detailedAttendance });
+        myList.push({ key, name, totalAttendance, detailedAttendance });
       });
       res.send(myList);
     })

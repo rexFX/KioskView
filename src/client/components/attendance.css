@@ -1,0 +1,53 @@
+.scrollProps::-webkit-scrollbar {
+	width: 1px;
+}
+
+.scrollProps::-webkit-scrollbar-track:vertical {
+	margin-top: 3em;
+	display: block;
+	background-color: #d8dee9;
+}
+
+.scrollProps::-webkit-scrollbar-track:horizontal {
+	display: block;
+	background-color: #d8dee9;
+}
+
+.scrollProps:hover::-webkit-scrollbar-thumb {
+	background-color: grey;
+	border-right: none;
+	border-left: none;
+}
+
+.scrollProps:active::-webkit-scrollbar-thumb {
+	background-color: grey;
+	border-right: none;
+	border-left: none;
+}
+
+.scrollProps2::-webkit-scrollbar {
+	width: 1px;
+}
+
+.scrollProps2::-webkit-scrollbar-track:vertical {
+	margin-top: 3em;
+	display: block;
+	background-color: rgb(203 213 225);
+}
+
+.scrollProps2::-webkit-scrollbar-track:horizontal {
+	display: block;
+	background-color: rgb(203 213 225);
+}
+
+.scrollProps2:hover::-webkit-scrollbar-thumb {
+	background-color: black;
+	border-right: none;
+	border-left: none;
+}
+
+.scrollProps2:active::-webkit-scrollbar-thumb {
+	background-color: black;
+	border-right: none;
+	border-left: none;
+}

@@ -22,4 +22,4 @@ app.use('/api/v1', detailedAttendance);
 app.use('/api/v1', nav);
 app.use('/api/v1', marks);
 
-app.listen(3000);
+app.listen(3001);

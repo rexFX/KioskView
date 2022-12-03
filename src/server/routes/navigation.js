@@ -8,7 +8,7 @@ router.post('/nav', async (req, res) => {
   axios.get('https://webkiosk.juit.ac.in:9443/StudentFiles/PersonalFiles/ShowAlertMessageSTUD.jsp', { headers: { Cookie: req.body['Cookie'] } })
     .then(resp => {
       let $ = cheerio.load(resp.data);
-      name = $('body > center > p:nth-child(1) > font > b').text().match(/[^Welcome][A-Z][A-Z]*[\s][\s][A-Z][A-Z]*/)[0].trim();
+      name = $('body > center > p:nth-child(1) > font > b').text().match(/[^Welcome][A-Z][A-Z]*[\s]*[A-Z]*/)[0].trim();
       res.send(name);
     })
     .catch(err => {

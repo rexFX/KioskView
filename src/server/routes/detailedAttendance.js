@@ -10,7 +10,9 @@ router.post('/detailedAttendance/', async (req, res) => {
       let $ = cheerio.load(resp.data);
       let detailedList = [];
       $('#table-1 > tbody').children().each((i, el) => {
-        let subj = {};
+        let subj = {
+          key: i,
+        };
         for (let x = 2; x <= 5; x++) {
           subj[$(`#table-1 > thead > tr > td:nth-child(${x})`).text().trim()] = $(`td:nth-child(${x})`, el).text();
         }
