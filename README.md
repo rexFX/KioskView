@@ -1,4 +1,4 @@
-#Frontend for webkiosk
+# Frontend for webkiosk
 
 1. Clone the repository
 2. Do `npm i`
