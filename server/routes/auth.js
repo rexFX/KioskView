@@ -23,7 +23,8 @@ router.post('/login', async (req, res) => {
     let cookie = response.headers['set-cookie'][0].match(/^J[=A-Z0-9]*/)[0];
     res.cookie('Cookie', `${cookie}`);
     res.status(200);
-    res.send(`${cookie}`);
+    res.write(`${cookie}`);
+    res.end();
   }
   catch (err) {
     res.status(401);

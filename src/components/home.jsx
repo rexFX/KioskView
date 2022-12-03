@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../authClient";
+import { useAuth } from "../context/authClient";
 
 export const Home = () => {
 	const auth = useAuth();

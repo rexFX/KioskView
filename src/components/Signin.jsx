@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../authClient.js";
+import { useAuth } from "../context/authClient.js";
 import axios from "axios";
 
 const Signin = () => {
@@ -20,11 +20,13 @@ const Signin = () => {
 		event.preventDefault();
 		const baseUrl = "http://localhost:3001/api/v1/";
 		axios
-			.post(baseUrl + "login", { user, pass })
+			.post(baseUrl + "login", { user, pass }, { withCredentials: true })
 			.then((res) => {
 				if (res.status === 200) {
 					axios
-						.post(baseUrl + "nav", { Cookie: res.data })
+						.post(baseUrl + "fetchUsername", null, {
+							withCredentials: true,
+						})
 						.then((resp) => {
 							auth.login({
 								user: resp.data,
@@ -43,10 +45,9 @@ const Signin = () => {
 	};
 
 	return (
-		<div className="grid w-screen h-screen place-items-center bg-slate-100 relative z-0">
-			<h1 className={`font-coda text-[25em] text-slate-400`}>Webkiosk</h1>
+		<div className="grid w-screen h-screen place-items-center bg-slate-100">
 			<div
-				className="container max-w-[25em] min-w-[22em] max-h-[22em] min-h-[20em] shadow-2xl rounded-lg z-1 absolute"
+				className="container max-w-[25em] min-w-[22em] max-h-[22em] min-h-[20em] shadow-2xl rounded-lg"
 				style={{ backgroundColor: "#81A1C1" }}
 			>
 				<h1 className="text-center mt-7 text-3xl text-white font-bold underline underline-offset-8">

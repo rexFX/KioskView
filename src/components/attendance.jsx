@@ -3,7 +3,6 @@ import { useRef } from "react";
 import { useState } from "react";
 import "./attendance.css";
 import { ReactComponent as LoadingSVG } from "../svg/loading.svg";
-import { useAuth } from "../authClient";
 import axios from "axios";
 
 const DetailsToggle = (ref, handler) => {
@@ -28,7 +27,6 @@ const DetailsToggle = (ref, handler) => {
 export const Attendance = () => {
 	const [data, setData] = useState([]);
 	const [details, setDetails] = useState([]);
-	const auth = useAuth();
 	const ref = useRef();
 
 	const [overviewFetched, setOverviewFetched] = useState(false);
@@ -40,10 +38,13 @@ export const Attendance = () => {
 
 		const baseUrl = "http://localhost:3001/api/v1/detailedAttendance";
 		axios
-			.post(baseUrl, {
-				Cookie: auth.cookie,
-				link: event.target.value,
-			})
+			.post(
+				baseUrl,
+				{
+					link: event.target.value,
+				},
+				{ withCredentials: true }
+			)
 			.then((res) => {
 				setDetails(res.data);
 				setShowDet(true);
@@ -62,7 +63,7 @@ export const Attendance = () => {
 	useEffect(() => {
 		const baseUrl = "http://localhost:3001/api/v1/attendance";
 		axios
-			.post(baseUrl, { Cookie: auth.cookie })
+			.post(baseUrl, null, { withCredentials: true })
 			.then((res) => {
 				setData(res.data);
 				setOverviewFetched(true);

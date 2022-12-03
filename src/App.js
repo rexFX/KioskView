@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import { MainLayout } from "./client/components/mainLayout";
-import Signin from "./client/components/Signin";
-import { Home } from "./client/components/home";
-import { Attendance } from "./client/components/attendance";
-import { Marks } from "./client/components/marks";
+import { MainLayout } from "./components/mainLayout";
+import Signin from "./components/Signin";
+import { Home } from "./components/home";
+import { Attendance } from "./components/attendance";
+import { Marks } from "./components/marks";
 
 const App = () => {
   return (

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ReactComponent as LoadingSVG } from "../svg/loading.svg";
-import { useAuth } from "../authClient";
 
 const Collapsible = (props) => {
 	const [toggle, setToggle] = useState(false);
@@ -51,14 +50,13 @@ const Collapsible = (props) => {
 };
 
 export const Marks = () => {
-	const auth = useAuth();
 	const [examMarks, setExamMarks] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		axios
-			.post("http://localhost:3001/api/v1/marks", {
-				Cookie: auth.cookie,
+			.post("http://localhost:3001/api/v1/marks", null, {
+				withCredentials: true,
 			})
 			.then((res) => {
 				setExamMarks(res.data);

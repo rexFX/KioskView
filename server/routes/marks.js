@@ -5,12 +5,12 @@ const axios = require('axios');
 
 router.post('/marks', async (req, res) => {
   let choice;
-  axios.get('https://webkiosk.juit.ac.in:9443/StudentFiles/Exam/StudentEventMarksView.jsp', { headers: { Cookie: req.body['Cookie'] } })
+  axios.get('https://webkiosk.juit.ac.in:9443/StudentFiles/Exam/StudentEventMarksView.jsp', { headers: { Cookie: req.cookies['Cookie'] } })
     .then(resp => {
       let $ = cheerio.load(resp.data);
       choice = $('#exam > option:nth-child(2)').text();
       let marksList = [];
-      axios.get(`https://webkiosk.juit.ac.in:9443/StudentFiles/Exam/StudentEventMarksView.jsp?x=&exam=${choice}`, { headers: { Cookie: req.body['Cookie'] } })
+      axios.get(`https://webkiosk.juit.ac.in:9443/StudentFiles/Exam/StudentEventMarksView.jsp?x=&exam=${choice}`, { headers: { Cookie: req.cookies['Cookie'] } })
         .then(resp => {
           let $ = cheerio.load(resp.data);
           $('#table-1 > tbody').children().each((i, el) => {

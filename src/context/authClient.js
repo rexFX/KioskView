@@ -1,12 +1,12 @@
 import { createContext, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-  const [cookie, setCookie] = useState(null);
   const [roll, setRoll] = useState(null);
 
   const navigate = useNavigate();
@@ -14,7 +14,6 @@ export const AuthProvider = ({ children }) => {
   const login = (data) => {
     setUser(data['user']);
     setRoll(data['roll']);
-    setCookie(data['cookie']);
     setLoggedIn(true);
     navigate('/home');
   }
@@ -23,12 +22,13 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     setRoll(null)
-    setCookie(null);
     setLoggedIn(false);
-    navigate('/');
+    axios.post('http://localhost:3001/api/v1/logout', null, { withCredentials: true })
+      .then(navigate('/'))
+      .catch(err => alert(err));
   }
 
-  return <AuthContext.Provider value={{ user, cookie, isLoggedIn, roll, login, logout }}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{ user, isLoggedIn, roll, login, logout }}>{children}</AuthContext.Provider>
 };
 
 export const useAuth = () => {
