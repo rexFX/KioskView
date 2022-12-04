@@ -4,6 +4,7 @@ import { useState } from "react";
 import "./attendance.css";
 import { ReactComponent as LoadingSVG } from "../svg/loading.svg";
 import axios from "axios";
+import { useAuth } from "../context/authClient";
 
 const DetailsToggle = (ref, handler) => {
 	useEffect(() => {
@@ -25,6 +26,7 @@ const DetailsToggle = (ref, handler) => {
 };
 
 export const Attendance = () => {
+	const auth = useAuth();
 	const [data, setData] = useState([]);
 	const [details, setDetails] = useState([]);
 	const ref = useRef();
@@ -39,13 +41,10 @@ export const Attendance = () => {
 		const baseUrl =
 			"https://webkiosk-api.onrender.com/api/v1/detailedAttendance";
 		axios
-			.post(
-				baseUrl,
-				{
-					link: event.target.value,
-				},
-				{ withCredentials: true }
-			)
+			.post(baseUrl, {
+				link: event.target.value,
+				Cookie: auth.cookie,
+			})
 			.then((res) => {
 				setDetails(res.data);
 				setShowDet(true);
@@ -64,13 +63,13 @@ export const Attendance = () => {
 	useEffect(() => {
 		const baseUrl = "https://webkiosk-api.onrender.com/api/v1/attendance";
 		axios
-			.post(baseUrl, null, { withCredentials: true })
+			.post(baseUrl, { Cookie: auth.cookie })
 			.then((res) => {
 				setData(res.data);
 				setOverviewFetched(true);
 			})
 			.catch((err) => alert(err));
-	}, []);
+	});
 
 	return (
 		<div className="h-screen grid place-items-center z-0 relative">

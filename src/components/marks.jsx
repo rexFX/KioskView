@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ReactComponent as LoadingSVG } from "../svg/loading.svg";
+import { useAuth } from "../context/authClient";
 
 const Collapsible = (props) => {
 	const [toggle, setToggle] = useState(false);
@@ -52,11 +53,12 @@ const Collapsible = (props) => {
 export const Marks = () => {
 	const [examMarks, setExamMarks] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const auth = useAuth();
 
 	useEffect(() => {
 		axios
-			.post("https://webkiosk-api.onrender.com/api/v1/marks", null, {
-				withCredentials: true,
+			.post("https://webkiosk-api.onrender.com/api/v1/marks", {
+				Cookie: auth.cookie,
 			})
 			.then((res) => {
 				setExamMarks(res.data);

@@ -20,19 +20,19 @@ const Signin = () => {
 		event.preventDefault();
 		const baseUrl = "https://webkiosk-api.onrender.com/api/v1/";
 		axios
-			.post(baseUrl + "login", { user, pass }, { withCredentials: true })
+			.post(baseUrl + "login", { user, pass })
 			.then((res) => {
 				if (res.status === 200) {
-					document.cookie = `Cookie=${res.data}`;
+					// document.cookie = `Cookie=${res.data}`;
 					axios
-						.post(baseUrl + "fetchUsername", null, {
-							withCredentials: true,
+						.post(baseUrl + "fetchUsername", {
+							Cookie: res.data,
 						})
 						.then((resp) => {
-							console.log(resp);
 							auth.login({
 								user: resp.data,
 								roll: user,
+								Cookie: res.data,
 							});
 						})
 						.catch((err) => console.log(err));
