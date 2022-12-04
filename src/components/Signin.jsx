@@ -18,16 +18,18 @@ const Signin = () => {
 
 	const authHandler = async (event) => {
 		event.preventDefault();
-		const baseUrl = "https://webkiosk-api.onrender.com/api/v1/";
+		const baseUrl = "https://webkiosk-api.onrender.com";
 		axios
 			.post(baseUrl + "login", { user, pass }, { withCredentials: true })
 			.then((res) => {
 				if (res.status === 200) {
+					document.cookie = `Cookie=${res.data}`;
 					axios
 						.post(baseUrl + "fetchUsername", null, {
 							withCredentials: true,
 						})
 						.then((resp) => {
+							console.log(resp);
 							auth.login({
 								user: resp.data,
 								roll: user,

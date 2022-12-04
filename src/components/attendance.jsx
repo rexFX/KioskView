@@ -70,7 +70,7 @@ export const Attendance = () => {
 				setOverviewFetched(true);
 			})
 			.catch((err) => alert(err));
-	});
+	}, []);
 
 	return (
 		<div className="h-screen grid place-items-center z-0 relative">
