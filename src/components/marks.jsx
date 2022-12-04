@@ -55,7 +55,7 @@ export const Marks = () => {
 
 	useEffect(() => {
 		axios
-			.post("http://localhost:3001/api/v1/marks", null, {
+			.post("https://webkiosk-api.onrender.com/api/v1/marks", null, {
 				withCredentials: true,
 			})
 			.then((res) => {

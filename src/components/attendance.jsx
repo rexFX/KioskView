@@ -36,7 +36,8 @@ export const Attendance = () => {
 	const toggleView = async (event) => {
 		setShow(!show);
 
-		const baseUrl = "http://localhost:3001/api/v1/detailedAttendance";
+		const baseUrl =
+			"https://webkiosk-api.onrender.com/api/v1/detailedAttendance";
 		axios
 			.post(
 				baseUrl,
@@ -61,7 +62,7 @@ export const Attendance = () => {
 	});
 
 	useEffect(() => {
-		const baseUrl = "http://localhost:3001/api/v1/attendance";
+		const baseUrl = "https://webkiosk-api.onrender.com/api/v1/attendance";
 		axios
 			.post(baseUrl, null, { withCredentials: true })
 			.then((res) => {

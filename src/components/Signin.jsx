@@ -18,7 +18,7 @@ const Signin = () => {
 
 	const authHandler = async (event) => {
 		event.preventDefault();
-		const baseUrl = "http://localhost:3001/api/v1/";
+		const baseUrl = "https://webkiosk-api.onrender.com/api/v1/";
 		axios
 			.post(baseUrl + "login", { user, pass }, { withCredentials: true })
 			.then((res) => {
