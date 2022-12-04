@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setRoll(null)
     setLoggedIn(false);
-    axios.post('https://webkiosk-api.onrender.com/api/v1/logout', null, { headers: { Cookie: cookie } })
+    axios.post('https://webkiosk-api.onrender.com/api/v1/logout', { Cookie: cookie })
       .then(navigate('/'))
       .catch(err => alert(err));
   }
