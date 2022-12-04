@@ -31,7 +31,6 @@ const Signin = () => {
 							auth.login({
 								user: resp.data,
 								roll: user,
-								cookie: res.data,
 							});
 						})
 						.catch((err) => console.log(err));
