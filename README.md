@@ -1,5 +1,14 @@
 # Frontend for webkiosk
 
-1. Clone the repository
-2. Do `npm i`
-3. `npm start` or `yarn start` will run the react app
+`Note: Webkiosk can only be accessed with valid official credentials`
+
+Screenshots:
+![login](./imgs/login.png)
+
+![home](./imgs/homepage.png)
+
+![attendance](./imgs/attendance.png)
+
+![detailedAttendance](./imgs/detailedAttendance.png)
+
+![marks](./imgs/marks.png)
